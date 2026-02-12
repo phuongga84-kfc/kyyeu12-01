@@ -444,81 +444,114 @@
         }
 
         /* --- RESPONSIVE MOBILE --- */
-        @media (max-width: 768px) {
-            .header-section {
-                padding-top: 30px;
-            }
+        /* --- RESPONSIVE MOBILE --- */
+@media (max-width: 768px) {
+    /* Khóa cuộn ngang tuyệt đối cho body để tránh bị lệch layout */
+    body, html {
+        overflow-x: hidden;
+        width: 100%;
+    }
 
-            .main-title {
-                font-size: 3.5rem;
-                margin-bottom: 10px;
-            }
+    .container {
+        /* Giảm padding hai bên để nội dung có thêm không gian */
+        padding: 40px 15px 80px;
+        width: 100%;
+        overflow: hidden; /* Đảm bảo không phần tử con nào tràn ra */
+    }
 
-            .sub-title {
-                font-size: 0.85rem;
-            }
+    .header-section {
+        padding-top: 20px;
+    }
 
-            /* Smaller countdown boxes */
-            .countdown-container {
-                gap: 10px;
-                margin: 30px 0;
-            }
+    .main-title {
+        /* Giảm kích thước tên tiệc */
+        font-size: 3rem; 
+        margin-bottom: 10px;
+        line-height: 1.1;
+    }
 
-            .cd-box {
-                min-width: 70px;
-                padding: 15px 5px;
-                border-radius: 15px;
-            }
+    .sub-title {
+        font-size: 0.8rem;
+    }
 
-            .cd-number {
-                font-size: 1.8rem;
-            }
+    /* --- SỬA LỖI TIÊU ĐỀ BỊ RỚT DÒNG XẤU --- */
+    .section-title {
+        /* Giảm từ 3rem xuống 2.2rem để vừa màn hình điện thoại */
+        font-size: 2.2rem; 
+        margin-bottom: 30px;
+        line-height: 1.3;
+        /* Đảm bảo ngắt dòng hợp lý, không ngắt giữa từ nếu có thể */
+        word-wrap: break-word; 
+        padding: 0 10px;
+    }
 
-            .cd-label {
-                font-size: 0.6rem;
-                letter-spacing: 1px;
-            }
+    /* Countdown nhỏ gọn hơn */
+    .countdown-container {
+        gap: 8px;
+        margin: 30px 0;
+    }
 
-            /* Tách Box Time và Location */
-            .info-grid {
-                grid-template-columns: 1fr;
-                gap: 40px;
-                /* Tăng khoảng cách giữa 2 box */
-            }
+    .cd-box {
+        min-width: 65px; /* Thu nhỏ chiều rộng tối thiểu */
+        padding: 12px 4px;
+        border-radius: 15px;
+    }
 
-            .info-box {
-                margin: 0 5px;
-                /* Thêm lề để không sát mép màn hình */
-                animation: float 6s ease-in-out infinite;
-                /* Hiệu ứng trôi nhẹ */
-            }
+    .cd-number {
+        font-size: 1.6rem;
+    }
 
-            /* Box 2 (Map) delay animation slightly */
-            .info-grid .info-box:nth-child(2) {
-                animation-delay: 3s;
-            }
+    .cd-label {
+        font-size: 0.55rem;
+    }
 
-            .section-title {
-                font-size: 3rem;
-                margin-bottom: 30px;
-            }
+    /* --- SỬA LỖI LỆCH LAYOUT Ở PHẦN LỊCH & MAP --- */
+    .info-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 30px; /* Khoảng cách giữa 2 hộp */
+        margin-top: 10px;
+    }
 
-            .map-inner {
-                height: 250px;
-                min-height: 250px;
-            }
+    .info-box {
+        margin: 0; /* Xóa margin thừa gây lệch */
+        width: 100%; /* Chiếm full chiều rộng container */
+        padding: 25px 15px; /* Giảm padding trong hộp một chút */
+        animation: float 6s ease-in-out infinite;
+    }
 
-            .music-control {
-                bottom: 20px;
-                right: 20px;
-            }
+    /* Sửa bảng lịch để không bị tràn nếu màn hình quá bé */
+    table {
+        font-size: 0.9rem; /* Giảm cỡ chữ lịch */
+    }
+    
+    td, th {
+        padding: 8px 2px; /* Giảm khoảng cách các ô ngày */
+    }
 
-            .music-btn {
-                width: 45px;
-                height: 45px;
-                font-size: 1.1rem;
-            }
-        }
+    .map-inner {
+        height: 250px;
+        min-height: 250px;
+    }
+
+    /* Nút nhạc */
+    .music-control {
+        bottom: 20px;
+        right: 15px;
+    }
+
+    .music-btn {
+        width: 45px;
+        height: 45px;
+        font-size: 1.1rem;
+    }
+    
+    /* Overlay Welcome */
+    .signature-font {
+        /* Fix tiêu đề ở màn hình chào mừng nếu bị to quá */
+        font-size: 2.5rem !important; 
+    }
+}
 
         /* --- WELCOME OVERLAY --- */
         #welcome-overlay {
