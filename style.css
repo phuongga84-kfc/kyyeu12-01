@@ -42,6 +42,10 @@
             font-family: 'Pinyon Script', cursive;
             font-weight: 400;
         }
+        .signature-font2 {
+            font-family: 'Pinyon Script', cursive;
+            font-weight: 400;
+        }
 
         .serif-font {
             font-family: 'Playfair Display', serif;
@@ -550,6 +554,10 @@
     .signature-font {
         /* Fix tiêu đề ở màn hình chào mừng nếu bị to quá */
         font-size: 2rem !important; 
+    }
+    .signature-font2 {
+        /* Fix tiêu đề ở màn hình chào mừng nếu bị to quá */
+        font-size: 3rem !important; 
     }
 }
 
