@@ -99,69 +99,51 @@ const timer = setInterval(function () {
   document.getElementById("seconds").innerText = s < 10 ? "0" + s : s;
 }, 1000);
 
-/* --- MUSIC PLAYER --- */
-/* --- MUSIC PLAYER AUTO-PLAY --- */
+/* --- MUSIC PLAYER OPTIMIZED --- */
 const music = document.getElementById("bg-music");
 const btn = document.getElementById("musicBtn");
-let isPlaying = false;
 music.volume = 0.5;
 
-// Hàm xử lý hiển thị icon nút nhạc
-function updateMusicIcon(playing) {
-  if (playing) {
-    btn.innerHTML = "❚❚"; // Icon Pause
-    btn.classList.add("music-anim");
-  } else {
-    btn.innerHTML = "♫"; // Icon Play
-    btn.classList.remove("music-anim");
-  }
+// Hàm cập nhật giao diện nút dựa trên trạng thái thực tế của nhạc
+function updateButtonUI() {
+    if (!music.paused) {
+        btn.innerHTML = "❚❚"; 
+        btn.classList.add("music-anim");
+    } else {
+        btn.innerHTML = "♫";
+        btn.classList.remove("music-anim");
+    }
 }
 
-// 1. Cố gắng phát nhạc ngay khi web tải xong
-window.addEventListener("load", function () {
-  const playPromise = music.play();
+// Lắng nghe sự kiện từ chính thẻ audio để cập nhật icon
+music.onplay = updateButtonUI;
+music.onpause = updateButtonUI;
 
-  if (playPromise !== undefined) {
-    playPromise
-      .then((_) => {
-        // Tự động phát thành công
-        isPlaying = true;
-        updateMusicIcon(true);
-      })
-      .catch((error) => {
-        // Bị trình duyệt chặn -> Chờ người dùng chạm vào màn hình lần đầu
-        console.log("Autoplay bị chặn, chờ tương tác người dùng...");
-        document.addEventListener("click", startMusicOnInteraction, {
-          once: true,
-        });
-        document.addEventListener("touchstart", startMusicOnInteraction, {
-          once: true,
-        });
-        document.addEventListener("scroll", startMusicOnInteraction, {
-          once: true,
-        });
-      });
-  }
+// Hàm cố gắng phát nhạc
+function attemptPlay() {
+    music.play().catch(() => {
+        console.log("Trình duyệt chặn tự động phát, chờ tương tác...");
+    });
+}
+
+// 1. Thử phát ngay khi trang load
+window.addEventListener('load', attemptPlay);
+
+// 2. Kích hoạt khi có bất kỳ tương tác nào của người dùng vào trang
+const interactions = ['click', 'touchstart', 'scroll', 'keydown'];
+interactions.forEach(event => {
+    document.addEventListener(event, function() {
+        if (music.paused) {
+            attemptPlay();
+        }
+    }, { once: true }); // Chỉ chạy 1 lần duy nhất để kích hoạt nhạc
 });
 
-// Hàm kích hoạt nhạc khi người dùng chạm vào web
-function startMusicOnInteraction() {
-  if (!isPlaying) {
-    music.play();
-    isPlaying = true;
-    updateMusicIcon(true);
-  }
-}
-
-// Nút bật/tắt thủ công (giữ nguyên tính năng này)
+// 3. Hàm cho nút bấm thủ công
 function toggleMusic() {
-  if (isPlaying) {
-    music.pause();
-    isPlaying = false;
-    updateMusicIcon(false);
-  } else {
-    music.play();
-    isPlaying = true;
-    updateMusicIcon(true);
-  }
+    if (music.paused) {
+        music.play();
+    } else {
+        music.pause();
+    }
 }

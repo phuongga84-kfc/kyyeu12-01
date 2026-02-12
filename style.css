@@ -549,7 +549,7 @@
     /* Overlay Welcome */
     .signature-font {
         /* Fix tiêu đề ở màn hình chào mừng nếu bị to quá */
-        font-size: 2.5rem !important; 
+        font-size: 2rem !important; 
     }
 }
 
