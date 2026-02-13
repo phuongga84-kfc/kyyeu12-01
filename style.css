@@ -459,12 +459,23 @@
             transition: all 1s ease-out;
         }
 
+        .reveal-left {
+            transform: translateX(-60px);
+        }
+
+        .reveal-right {
+            transform: translateX(60px);
+        }
+
         .reveal.active {
             opacity: 1;
             transform: translateY(0);
         }
 
-        /* --- RESPONSIVE MOBILE --- */
+        .reveal-left.active,
+        .reveal-right.active {
+            transform: translateX(0);
+        }
         /* --- RESPONSIVE MOBILE --- */
 @media (max-width: 768px) {
     /* Khóa cuộn ngang tuyệt đối cho body để tránh bị lệch layout */
