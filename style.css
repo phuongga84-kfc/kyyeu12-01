@@ -25,7 +25,14 @@
             min-height: 100vh;
             position: relative;
         }
-
+        @keyframes heartbeat {
+    0% { transform: translate(-50%, -50%) scale(1); }
+    15% { transform: translate(-50%, -50%) scale(1.15); } /* Phóng to lần 1 */
+    30% { transform: translate(-50%, -50%) scale(1); }    /* Thu nhỏ */
+    45% { transform: translate(-50%, -50%) scale(1.15); } /* Phóng to lần 2 */
+    60% { transform: translate(-50%, -50%) scale(1); }    /* Thu nhỏ và nghỉ */
+    100% { transform: translate(-50%, -50%) scale(1); }
+}
         /* --- CANVAS CONFETTI BACKGROUND --- */
         #confetti-canvas {
             position: fixed;
@@ -327,24 +334,34 @@
         }
 
         .special-day {
-            color: #fff;
-            position: relative;
-            z-index: 2;
-        }
+    color: #fff;
+    position: relative;
+    z-index: 2;
+}
 
-        .special-day::before {
-            content: "";
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 40px;
-            height: 40px;
-            background: var(--primary-gold);
-            border-radius: 50%;
-            z-index: -1;
-            box-shadow: 0 4px 10px rgba(197, 160, 89, 0.4);
-        }
+.special-day::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    background: var(--primary-gold); 
+    
+    width: 44px; 
+    height: 44px;
+
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/%3E%3C/svg%3E") no-repeat center center;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/%3E%3C/svg%3E") no-repeat center center;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+
+    border-radius: 0; 
+    
+    z-index: -1;
+    
+    animation: heartbeat 2s infinite ease-in-out;
+    
+    filter: drop-shadow(0 0 5px rgba(197, 160, 89, 0.6));
+}
 
         /* Map specific */
         .map-inner {

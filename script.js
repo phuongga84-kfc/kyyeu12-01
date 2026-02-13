@@ -77,7 +77,7 @@ const observer = new IntersectionObserver(
 document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
 
 /* --- COUNTDOWN --- */
-const eventDate = new Date("March 14, 2026 17:00:00").getTime();
+const eventDate = new Date("March 15, 2026 07:30:00").getTime();
 
 const timer = setInterval(function () {
   const now = new Date().getTime();
